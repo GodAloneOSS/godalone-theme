@@ -1,0 +1,100 @@
+GODALONE PREMIUM — WordPress Theme
+Deep-navy & gold, matching the godalone.in/quran reader.
+====================================================================
+
+WHAT THIS IS
+------------
+A complete, premium replacement theme for godalone.in. It reproduces the
+whole homepage (hero, verse, "Discover the Message" cards, Islamic
+Utilities, newsletter, Telegram) plus the header menu, footer, Google
+login, dark/light toggle, purchase pop-up and the floating "Read Quran"
+button — all restyled to match the Quran reader's deep-navy & gold look.
+
+It is self-contained: the brand mark is drawn in code, so NO logo image
+file is required. (If you prefer the old PNG logo, see step 6.)
+
+
+====================================================================
+HOW TO INSTALL  (recommended — safe & reversible)
+====================================================================
+This installs as a NEW theme called "GodAlone Premium" and leaves the
+current theme untouched, so you can switch back instantly if needed.
+
+1. Log in to WordPress admin  (godalone.in/wp-admin).
+
+2. Go to:  Appearance → Themes → Add New → Upload Theme.
+
+3. Choose  godalone-premium.zip  →  Install Now.
+
+4. Click  Activate.
+
+5. Visit godalone.in in a new tab and check it looks right.
+
+6. (Optional) Set the logo:
+   Appearance → Customize → look for "Site Logo / Custom Logo" and
+   upload the GodAlone logo. If you skip this, an elegant gold brand
+   mark is shown automatically.
+
+7. Clear the cache so visitors see the new design:
+   hPanel (Hostinger) → LiteSpeed Cache → Purge All
+   (or the LiteSpeed Cache plugin → Toolbox → Purge All).
+
+Done. To roll back at any time: Appearance → Themes → activate the old
+theme again.
+
+
+====================================================================
+ALTERNATIVE — replace the existing theme folder (via File Manager/FTP)
+====================================================================
+Do this only if you specifically want to overwrite the current theme.
+
+1. In Hostinger File Manager, go to:
+      public_html/wp-content/themes/
+2. Rename the existing "godalone-theme" folder to "godalone-theme-OLD"
+   (this is your backup).
+3. Create a new folder "godalone-theme" and upload ALL the files from
+   inside this zip into it (style.css, functions.php, header.php, etc.),
+   keeping the same structure (assets/, template-parts/).
+4. Clear the LiteSpeed cache (see step 7 above).
+   The site stays active on "godalone-theme" automatically.
+
+
+====================================================================
+AFTER INSTALLING — QUICK CHECKS
+====================================================================
+✓ Homepage shows the new navy & gold design.
+✓ The ☀️/🌙 button switches light / dark.
+✓ "Login" opens Google sign-in (uses your existing Firebase project).
+✓ "Purchase Quran" opens the Amazon / Flipkart pop-up.
+✓ Newsletter form: enter an email and Subscribe — you should see a
+  success message. Subscribers appear in wp-admin under "Subscribers"
+  (left menu), and the site admin gets an email for each new one.
+
+NEWSLETTER NOTE
+---------------
+This theme includes its own working newsletter handler (it stores
+subscribers in WordPress and emails the admin). If the OLD site sent
+subscribers to a mail service (e.g. Mailchimp/Brevo), open functions.php,
+find the function  ga_newsletter_subscribe()  and paste that provider's
+code there. The form itself keeps working either way.
+
+
+PAGES / MENU
+------------
+The header & footer menus are built in automatically (Home, Introduction,
+Mathematical Miracle, Online Quran, Downloads, Audio, Purchase, Library,
+Videos, Telegram Bot, Charity, Contact). Your existing WordPress Pages
+(/introduction, /mathematical-miracle, /contact, etc.) will use the new
+premium page layout with no extra work.
+
+If you want to customise the menu from wp-admin instead:
+Appearance → Menus → create a menu → assign it to "Primary Menu".
+
+
+REQUIREMENTS
+------------
+WordPress 5.8+, PHP 7.4+. Internet access for Google Fonts & Firebase
+(same as the current site).
+
+Questions? Everything is plain, commented code — open any .php or the
+style.css and you'll see clearly-labelled sections.
