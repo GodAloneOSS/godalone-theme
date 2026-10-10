@@ -44,20 +44,15 @@ try{var t=localStorage.getItem('gaTheme3');if(t==='day')document.documentElement
         <a href="https://ekkhuda.org" rel="noopener">हिंदी</a>
       </div>
 
-      <button class="login" id="ghSignin" type="button">
-        <svg class="gg" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.1 0 24 0 14.6 0 6.4 5.4 2.5 13.3l7.8 6.1C12.2 13.2 17.6 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.1 5.3-4.6 7l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.5z"/><path fill="#FBBC05" d="M10.3 28.6c-.5-1.4-.7-2.9-.7-4.6s.3-3.2.7-4.6l-7.8-6.1C.9 16.5 0 20.1 0 24s.9 7.5 2.5 10.7l7.8-6.1z"/><path fill="#34A853" d="M24 48c6.1 0 11.3-2 15-5.5l-7.1-5.5c-2 1.3-4.6 2.1-7.9 2.1-6.4 0-11.8-3.7-13.7-9.1l-7.8 6.1C6.4 42.6 14.6 48 24 48z"/></svg>
-        <span>Login</span>
-      </button>
-
-      <div class="userw" id="ghUserw">
-        <button class="chip" id="ghChip" type="button"><span class="av" id="ghAv">?</span><span id="ghUnm">Account</span></button>
-        <div class="umenu" id="ghUmenu">
-          <div class="un" id="ghUfull">Signed in</div>
-          <div class="ue" id="ghUml"></div>
-          <button id="ghSignout" type="button">Sign out</button>
-        </div>
+      <div class="srchw" id="ghSrchw">
+        <button class="ic" id="ghSearchBtn" aria-label="Search" type="button">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <form class="srchbox" id="ghSrchbox" action="<?php echo esc_url(home_url('/')); ?>" method="get" role="search">
+          <input type="text" name="s" id="ghSrchInput" placeholder="Search..." autocomplete="off">
+          <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </form>
       </div>
-
       <button class="ic" id="ghThemeBtn" aria-label="Toggle theme" type="button">🌙</button>
     </div>
   </div>
