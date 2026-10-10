@@ -16,22 +16,22 @@
     <div>
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="<?php echo esc_url(home_url('/')); ?>">🏠 Home</a></li>
-        <li><a href="<?php echo esc_url(home_url('/introduction')); ?>">📖 Introduction</a></li>
         <li><a href="<?php echo esc_url(home_url('/mathematical-miracle')); ?>">🔢 Mathematical Miracle</a></li>
-        <li><a href="<?php echo esc_url(home_url('/quran/')); ?>" target="_blank" rel="noopener">💻 Online Quran</a></li>
-        <li><a href="<?php echo esc_url(home_url('/downloads')); ?>">📱 Quran Application</a></li>
+        <li><a href="<?php echo esc_url(home_url('/videos')); ?>">🎥 Submission Videos</a></li>
+        <li><a href="<?php echo esc_url(home_url('/salat-timing')); ?>">🕌 Salat &amp; Ramadan Calculator</a></li>
+        <li><a href="<?php echo esc_url(home_url('/library')); ?>">📚 Book Library</a></li>
+        <li><a href="https://19code.org/en/" target="_blank" rel="noopener">🔬 19code.org</a></li>
       </ul>
     </div>
 
     <div>
-      <h4>Resources</h4>
+      <h4>Resource</h4>
       <ul>
+        <li><a href="<?php echo esc_url(home_url('/downloads')); ?>">📥 Quran Download</a></li>
         <li><a href="<?php echo esc_url(home_url('/audio-quran')); ?>">🎧 Quran Audio</a></li>
-        <li><a href="<?php echo esc_url(home_url('/library')); ?>">📚 Book Library</a></li>
-        <li><a href="<?php echo esc_url(home_url('/videos')); ?>">🎥 Videos</a></li>
-        <li><a href="<?php echo esc_url(home_url('/calculator-19')); ?>">🔢 19 Calculator</a></li>
-        <li><a href="https://19code.org/en/" target="_blank" rel="noopener">🔬 19code.org</a></li>
+        <li><a class="gh-buy" href="#buy">🛒 Quran Purchase</a></li>
+        <li><a href="<?php echo esc_url(home_url('/quran-qa')); ?>">❓ Quran Q&amp;A</a></li>
+        <li><a href="<?php echo esc_url(home_url('/coloring-book')); ?>">🎨 Quran Coloring Book</a></li>
       </ul>
     </div>
 
@@ -39,18 +39,19 @@
       <h4>Connect</h4>
       <ul>
         <li><a href="<?php echo esc_url(home_url('/contact')); ?>">📞 Contact Us</a></li>
-        <li><a href="<?php echo esc_url(home_url('/charity')); ?>">❤️ Charity Trust</a></li>
-        <li><a href="https://whatsapp.com/channel/0029VaFkTy8I1rcog5x40346" target="_blank" rel="noopener">📢 WhatsApp Channel</a></li>
-        <li><a href="https://t.me/GodAlone_in" target="_blank" rel="noopener">📢 Telegram Channel</a></li>
-        <li><a href="https://youtube.com/kadavulmattum" target="_blank" rel="noopener">📺 YouTube Channel</a></li>
+        <li><a href="https://www.youtube.com/kadavulmattum" target="_blank" rel="noopener">📺 YouTube</a></li>
+        <li><a href="https://www.facebook.com/thameemnf" target="_blank" rel="noopener">📘 Facebook</a></li>
+        <li><a href="https://www.pinterest.com/kadavulmattum" target="_blank" rel="noopener">📌 Pinterest (Images)</a></li>
+        <li><a href="<?php echo esc_url(home_url('/faq')); ?>">💬 FAQ</a></li>
       </ul>
       <div class="gf-social">
-        <a href="https://whatsapp.com/channel/0029VaFkTy8I1rcog5x40346" target="_blank" rel="noopener" aria-label="WhatsApp"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/whatsapp.png')" aria-hidden="true"></span></a>
-        <a href="https://t.me/GodAlone_in" target="_blank" rel="noopener" aria-label="Telegram"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/telegram.png')" aria-hidden="true"></span></a>
-        <a href="https://www.youtube.com/kadavulmattum" target="_blank" rel="noopener" aria-label="YouTube"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/youtube.png')" aria-hidden="true"></span></a>
-        <a href="https://www.facebook.com/thameemnf" target="_blank" rel="noopener" aria-label="Facebook"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/facebook.png')" aria-hidden="true"></span></a>
-        <a href="https://x.com/thameemnf" target="_blank" rel="noopener" aria-label="X"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/x.png')" aria-hidden="true"></span></a>
+        <a href="https://whatsapp.com/channel/0029VaFkTy8I1rcog5x40346" target="_blank" rel="noopener" aria-label="WhatsApp"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/whatsapp-v2.svg')" aria-hidden="true"></span></a>
+        <a href="https://t.me/GodAlone_in" target="_blank" rel="noopener" aria-label="Telegram"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/telegram-v2.svg')" aria-hidden="true"></span></a>
+        <a href="https://www.youtube.com/kadavulmattum" target="_blank" rel="noopener" aria-label="YouTube"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/youtube-v2.svg')" aria-hidden="true"></span></a>
+        <a href="https://www.facebook.com/thameemnf" target="_blank" rel="noopener" aria-label="Facebook"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/facebook-v2.svg')" aria-hidden="true"></span></a>
+        <a href="https://x.com/thameemnf" target="_blank" rel="noopener" aria-label="X"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/x-v2.svg')" aria-hidden="true"></span></a>
         <a href="https://github.com/kadavulmattum" target="_blank" rel="noopener" aria-label="GitHub"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/github.svg')" aria-hidden="true"></span></a>
+      <a href="https://www.pinterest.com/kadavulmattum" target="_blank" rel="noopener" aria-label="Quran Picture Message"><span class="gf-icon" style="--gf-icon-src:url('<?php echo esc_url(get_template_directory_uri()); ?>/images/social/pinterest.svg')" aria-hidden="true"></span></a>
       </div>
     </div>
   </div>
