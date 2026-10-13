@@ -4,177 +4,49 @@
  *
  * Auto-loads for the "Library" page (slug: library) via the WordPress
  * template hierarchy. Migrated from the old godalone-theme into the
- * GodAlone Premium design system. The $books data array, wp_get_attachment_url()
- * cover references, and language-filter JS are preserved unchanged from the
- * original; only the markup/CSS wrapper is restyled to the new theme's
- * design tokens.
+ * GodAlone Premium design system. The /*
+ * Books come from the shared feed so one list serves godalone.in,
+ * kadavulmattum.org and ekkhuda.org. Add a book in books.json only.
+ * Cached 12 hours in the ga_library_books_v3 transient.
  */
-if (!defined('ABSPATH')) exit;
+$ga_feed  = 'https://godalone.in/wp-content/uploads/data/books.json';
+$ga_books = get_transient( 'ga_library_books_v3' );
+if ( false === $ga_books ) {
+	$ga_res = wp_remote_get( $ga_feed, array( 'timeout' => 10 ) );
+	if ( ! is_wp_error( $ga_res ) && 200 === (int) wp_remote_retrieve_response_code( $ga_res ) ) {
+		$ga_data = json_decode( wp_remote_retrieve_body( $ga_res ), true );
+		if ( ! empty( $ga_data['books'] ) && is_array( $ga_data['books'] ) ) {
+			$ga_books = $ga_data['books'];
+			set_transient( 'ga_library_books_v3', $ga_books, 12 * HOUR_IN_SECONDS );
+		}
+	}
+}
+if ( ! is_array( $ga_books ) ) {
+	$ga_books = array();
+}
 
-// BOOKS DATABASE
-$books = array(
-	// FIRST 6 BOOKS - Both Free Download AND Physical Purchase
-	array(
-		'title' => 'Quran: Arabic-English (Revised Edition)',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'English',
-		'cover' => 556, // WordPress Media Library ID
-		'pages' => '724 pages',
-		'type' => 'both', // Both download AND purchase
-		'description' => 'English translation with Original Arabic Text',
-		'download' => '/wp-content/uploads/2021/11/English-Arabic-Quran-Final.pdf',
-		'amazon' => 'https://amzn.in/d/0h9pgaP1',
-		'flipkart' => 'https://www.flipkart.com/search?q=Quran%20rashad'
-	),
-	array(
-		'title' => 'குர்ஆன்: இறுதி வேதம் (திருத்தப்பட்ட பதிப்பு)',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'Tamil',
-		'cover' => 702, // WordPress Media Library ID
-		'pages' => '565 pages',
-		'type' => 'both',
-		'description' => 'தமிழ் மொழிபெயர்ப்பு (அரபு குர்ஆனின் கணித அற்புதத்துடன்)',
-		'download' => '/wp-content/uploads/2021/09/TAMIL-QURAN-IRUTHI-VETHAM-.pdf',
-		'amazon' => 'https://amzn.in/d/0fd51qtV',
-		'flipkart' => 'https://www.flipkart.com/search?q=Quran%20rashad'
-	),
-	array(
-		'title' => 'Quran: English (Revised Edition)',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'English',
-		'cover' => 509, // WordPress Media Library ID
-		'pages' => '560 pages',
-		'type' => 'both',
-		'description' => 'English Quran (With Mathematical Miracle of Arabic Quran)',
-		'download' => '/wp-content/uploads/2021/08/English-Quran-The-Final-Scripture.pdf',
-		'amazon' => 'https://amzn.in/d/047W0zWp',
-		'flipkart' => 'https://www.flipkart.com/search?q=Quran%20rashad'
-	),
-	array(
-		'title' => 'Quran Hadith and Islam',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'English',
-		'cover' => 557, // WordPress Media Library ID
-		'pages' => '38 pages',
-		'type' => 'both',
-		'description' => 'Quran Hadith and Islam By Dr.Rashad Khalifa',
-		'download' => '/wp-content/uploads/2021/08/Quran-Hadith-Islam-English.pdf',
-		'amazon' => 'https://amzn.in/d/0g3tyKP3',
-		'flipkart' => 'https://www.flipkart.com/search?q=Quran%20rashad'
-	),
-	array(
-		'title' => 'குர்ஆன் ஹதீஸ் மற்றும் இஸ்லாம்',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'Tamil',
-		'cover' => 639, // WordPress Media Library ID
-		'pages' => '116 pages',
-		'type' => 'both',
-		'description' => 'Quran Hadith and Islam - Tamil Version',
-		'download' => '/wp-content/uploads/2021/08/Quran-Hadith-Islam-Tamil.pdf',
-		'amazon' => 'https://amzn.in/d/0fOLODIt',
-		'flipkart' => 'https://www.flipkart.com/search?q=Quran%20rashad'
-	),
-	array(
-		'title' => 'कुरान हदीस और इस्लाम',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'Hindi',
-		'cover' => 785, // WordPress Media Library ID
-		'pages' => '116 pages',
-		'type' => 'both',
-		'description' => 'Quran Hadith and Islam - Hindi Version',
-		'download' => '/wp-content/uploads/2022/07/Quran-Hadith-and-Islam-Hindi-version.pdf',
-		'amazon' => 'https://amzn.in/d/0aSP8spA',
-		'flipkart' => 'https://www.flipkart.com/search?q=Quran%20rashad'
-	),
+$ga_lang_names = array( 'en' => 'English', 'ta' => 'Tamil', 'hi' => 'Hindi', 'ur' => 'Urdu' );
 
-	// REMAINING BOOKS - Free Download Only
-	array(
-		'title' => 'قرآن حدیث اور اسلام',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'Urdu',
-		'cover' => 558, // WordPress Media Library ID
-		'pages' => '59 pages',
-		'type' => 'free', // Free download only
-		'description' => 'Quran Hadith and Islam - Urdu Version',
-		'download' => '/wp-content/uploads/2021/08/QHI-URDU.pdf',
-		'amazon' => '',
-		'flipkart' => ''
-	),
-	array(
-		'title' => 'Visual Presentation of the Miracle',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'English',
-		'cover' => 793, // WordPress Media Library ID
-		'pages' => '252 pages',
-		'type' => 'free', // Free download only
-		'description' => 'Explaining Mathematicle Miracle of Quran',
-		'download' => '/wp-content/uploads/2021/08/',
-		'amazon' => '',
-		'flipkart' => ''
-	),
-	array(
-		'title' => 'THE COMPUTER SPEAKS',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'English',
-		'cover' => 773, // WordPress Media Library ID
-		'pages' => '280 pages',
-		'type' => 'free', // Free download only
-		'description' => 'Explaining Mathematicle Miracle of Quran',
-		'download' => '/wp-content/uploads/2021/11/the_computer_speaks.pdf',
-		'amazon' => '',
-		'flipkart' => ''
-	),
-	array(
-		'title' => 'Beyond Probability',
-		'author' => 'Abdullah Arik',
-		'language' => 'English',
-		'cover' => 633, // WordPress Media Library ID
-		'pages' => '47 pages',
-		'type' => 'free', // Free download only
-		'description' => 'Explaining Mathematicle Miracle of Quran',
-		'download' => '/wp-content/uploads/2021/08/Beyond-Probability.pdf',
-		'amazon' => '',
-		'flipkart' => ''
-	),
-	array(
-		'title' => 'Quranic Prayers & Names of Allah',
-		'author' => 'From Quran',
-		'language' => 'Tamil',
-		'cover' => 801, // WordPress Media Library ID
-		'pages' => '90 pages',
-		'type' => 'free', // Free download only
-		'description' => 'Quranic Prayers & Names of Allah in Arabic,English & Tamil',
-		'download' => '/wp-content/uploads/2023/05/Quranic-Prayers-Names-of-Allah.pdf',
-		'amazon' => '',
-		'flipkart' => ''
-	),
-	array(
-		'title' => '64 Collection of Muslim Perspective',
-		'author' => 'Dr. Rashad Khalifa',
-		'language' => 'English',
-		'cover' => 1073, // WordPress Media Library ID
-		'pages' => '64 Issues',
-		'type' => 'free', // Free download only
-		'description' => 'Editor: Rashad Khalifa, Ph.D., From Feb 1985 to March 1990',
-		'download' => 'https://www.godalone.in/submitters-perspective/',
-		'button_text' => '↗️ Open Page', // Custom button text
-		'amazon' => '',
-		'flipkart' => ''
-	),
-	array(
-		'title' => 'புதிய நினைவூட்டல்',
-		'author' => 'Puthiya Ninaivootal',
-		'language' => 'Tamil',
-		'cover' => 1077, // WordPress Media Library ID
-		'pages' => '26 Books',
-		'type' => 'free', // Free download only
-		'description' => 'Tamil Monthly Magazine',
-		'download' => 'https://www.godalone.in/puthiya-ninaivootal/',
-		'button_text' => '↗️ Open Page', // Custom button text
-		'amazon' => '',
-		'flipkart' => ''
-	),
-);
+$books = array();
+foreach ( $ga_books as $ga_b ) {
+	$ga_code = isset( $ga_b['lang'] ) ? $ga_b['lang'] : '';
+	$ga_row  = array(
+		'title'       => isset( $ga_b['title']['en'] ) ? $ga_b['title']['en'] : '',
+		'author'      => isset( $ga_b['author']['en'] ) ? $ga_b['author']['en'] : '',
+		'language'    => isset( $ga_lang_names[ $ga_code ] ) ? $ga_lang_names[ $ga_code ] : '',
+		'cover'       => isset( $ga_b['coverId'] ) ? (int) $ga_b['coverId'] : 0,
+		'pages'       => isset( $ga_b['pagesLabel']['en'] ) ? $ga_b['pagesLabel']['en'] : '',
+		'type'        => ! empty( $ga_b['purchase'] ) ? 'both' : 'free',
+		'description' => isset( $ga_b['desc']['en'] ) ? $ga_b['desc']['en'] : '',
+		'download'    => ! empty( $ga_b['page'] ) ? $ga_b['page'] : ( isset( $ga_b['download'] ) ? $ga_b['download'] : '' ),
+		'amazon'      => isset( $ga_b['purchase'] ) ? $ga_b['purchase'] : '',
+		'flipkart'    => '',
+	);
+	if ( ! empty( $ga_b['page'] ) ) {
+		$ga_row['button_text'] = '↗️ Open Page';
+	}
+	$books[] = $ga_row;
+}
 
 get_header();
 ?>
@@ -217,10 +89,10 @@ get_header();
 
     <div class="lib-filters">
       <button class="lib-filter-btn active" data-language="all">🌍 All Languages</button>
-      <button class="lib-filter-btn" data-language="English">🇬🇧 English</button>
-      <button class="lib-filter-btn" data-language="Tamil">🇮🇳 தமிழ்</button>
-      <button class="lib-filter-btn" data-language="Hindi">🇮🇳 हिंदी</button>
-      <button class="lib-filter-btn" data-language="Urdu">🇵🇰 اردو</button>
+      <button class="lib-filter-btn" data-language="English">English</button>
+      <button class="lib-filter-btn" data-language="Tamil">தமிழ்</button>
+      <button class="lib-filter-btn" data-language="Hindi">हिंदी</button>
+      <button class="lib-filter-btn" data-language="Urdu">اردو</button>
     </div>
 
     <div class="lib-count">
