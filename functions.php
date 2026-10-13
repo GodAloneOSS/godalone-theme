@@ -386,3 +386,25 @@ function kh_enrich_content($title, $fallback) {
     );
     return isset($map[$title]) ? ($map[$title] . ' ' . $fallback) : $fallback;
 }
+
+/* GA-AUTO-PURGE: after any theme file is edited, the page cache is cleared automatically (checked at most once a minute),
+   and the Audio Quran page always asks the browser to re-check for the newest version. */
+add_action('init', function () {
+    if (get_transient('ga_purge_chk')) { return; }
+    set_transient('ga_purge_chk', 1, 60);
+    $dir = get_stylesheet_directory();
+    $latest = 0;
+    foreach ((array) glob($dir . '/*.{php,css,js}', GLOB_BRACE) as $f) {
+        $t = @filemtime($f);
+        if ($t && $t > $latest) { $latest = $t; }
+    }
+    if ($latest && (int) get_option('ga_theme_mtime') !== $latest) {
+        update_option('ga_theme_mtime', $latest, false);
+        do_action('litespeed_purge_all');
+    }
+});
+add_action('send_headers', function () {
+    if (function_exists('is_page') && is_page('audio-quran')) {
+        header('Cache-Control: no-cache, must-revalidate, max-age=0');
+    }
+}, 99);
