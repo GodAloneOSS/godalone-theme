@@ -36,6 +36,8 @@ get_header();
   humanity under the worship of the One True God.</p>
 </article>
 
+
+<style>/*introverse*/.ga-hl{color:#B45309;font-weight:800}html:not(.theme-day) .ga-hl{color:#FFD54A}.card .en-verse{font-size:15px;line-height:1.55;font-style:italic;margin:6px 0 10px;color:#8A5A00}.card .ar-verse{color:#8A5A00!important}.card .ar-ref,.card cite{color:#8A5A00!important;font-weight:700}blockquote{color:#8A5A00}html:not(.theme-day) .card .en-verse,html:not(.theme-day) .card .ar-verse,html:not(.theme-day) .card .ar-ref,html:not(.theme-day) .card cite,html:not(.theme-day) blockquote{color:#FFD54A!important}.card .ar-verse{font-size:1.3rem!important;line-height:1.9}</style>
 <section class="blk">
   <div class="wrap">
     <div class="sec-head">
@@ -47,10 +49,7 @@ get_header();
       <div class="card reveal">
         <div class="ico">🕌</div>
         <h3>What is Submission?</h3>
-        <p><strong>Submission</strong> (Islam, in Arabic) is the religion decreed
-        by God for all His creatures. It is not a new religion, but the same
-        message delivered by all of God's messengers throughout history — from
-        Abraham to Moses, from Jesus to Muhammad.</p>
+        <p><strong>Submission</strong> (Islam, in Arabic) is the religion decreed by God for all humanity. It is not a new religion, but the same fundamental message delivered by God's messengers throughout history&mdash;from Abraham to Moses, from Jesus to Muhammad: worship <strong class="ga-hl">God Alone</strong> and submit to Him.</p>
       </div>
 
       <div class="card reveal">
@@ -88,7 +87,7 @@ get_header();
   <div class="wrap">
     <div class="sec-head">
       <div class="kicker">Religious Duties</div>
-      <h2>The five pillars of Submission</h2>
+      <h2>The Five Core Duties of Submission</h2>
     </div>
     <div class="grid grid-3">
 
@@ -97,23 +96,26 @@ get_header();
         <h3>Shahada — Declaration of Faith</h3>
         <p>"There is no god except God."</p>
         <p class="ar-verse" style="font-size:1.15rem">شَهِدَ اللَّهُ أَنَّهُ لَا إِلَٰهَ إِلَّا هُوَ</p>
-        <cite class="ar-ref">Quran 3:18</cite>
+        <p class="en-verse">&ldquo;God bears witness that there is no god except He, and so do the angels and those who possess knowledge. Truthfully and equitably, He is the absolute god; there is no god but He, the Almighty, Most Wise.&rdquo;</p>
+<cite class="ar-ref">Quran 3:18</cite>
       </div>
 
       <div class="card duty-card reveal">
         <div class="principle-icon">🕌</div>
         <h3>Salat — Contact Prayer</h3>
         <p>Five daily Contact Prayers to maintain a connection with God.</p>
-        <p class="ar-verse" style="font-size:1.15rem">وَأَقِيمُوا الصَّلَاةَ طَرَفَيِ النَّهَارِ وَزُلَفًا مِّنَ اللَّيْلِ</p>
-        <cite class="ar-ref">Quran 11:114</cite>
+        <p class="ar-verse" style="font-size:1.15rem">إِنَّنى أَنَا اللَّهُ لا إِلٰهَ إِلّا أَنا۠ فَاعبُدنى وَأَقِمِ الصَّلوٰةَ لِذِكرى</p>
+        <p class="en-verse">"I am God; there is no other god beside Me. You shall worship Me alone, and observe the Contact Prayers (Salat) to remember Me."</p>
+<cite class="ar-ref">Quran 20:14</cite>
       </div>
 
       <div class="card duty-card reveal">
         <div class="principle-icon">💰</div>
         <h3>Zakat — Obligatory Charity</h3>
         <p>Purification of wealth by helping those in need.</p>
-        <p class="ar-verse" style="font-size:1.15rem">وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ</p>
-        <cite class="ar-ref">Quran 2:43</cite>
+        <p class="ar-verse" style="font-size:1.15rem">وَءَاتُوا حَقَّهُۥ يَوْمَ حَصَادِهِۦ</p>
+        <p class="en-verse">"And give its due on the day of its harvest."</p>
+<cite class="ar-ref">Quran 6:141</cite>
       </div>
 
       <div class="card duty-card reveal">
@@ -121,7 +123,8 @@ get_header();
         <h3>Sawm — Fasting</h3>
         <p>Fasting during the month of Ramadan for spiritual purification.</p>
         <p class="ar-verse" style="font-size:1.15rem">كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِن قَبْلِكُمْ</p>
-        <cite class="ar-ref">Quran 2:183</cite>
+        <p class="en-verse">&ldquo;O you who believe, fasting is decreed for you, as it was decreed for those before you, that you may attain salvation.&rdquo;</p>
+<cite class="ar-ref">Quran 2:183</cite>
       </div>
 
       <div class="card duty-card reveal">
@@ -129,7 +132,8 @@ get_header();
         <h3>Hajj — Pilgrimage</h3>
         <p>Pilgrimage to Mecca, once in a lifetime, for those who can afford it.</p>
         <p class="ar-verse" style="font-size:1.15rem">وَلِلَّهِ عَلَى النَّاسِ حِجُّ الْبَيْتِ مَنِ اسْتَطَاعَ إِلَيْهِ سَبِيلًا</p>
-        <cite class="ar-ref">Quran 3:97</cite>
+        <p class="en-verse">&ldquo;The people owe it to God that they shall observe Hajj to this shrine, when they can afford it.&rdquo;</p>
+<cite class="ar-ref">Quran 3:97</cite>
       </div>
 
     </div>
@@ -178,7 +182,8 @@ get_header();
     <span class="q">&ldquo;</span>
     <p class="ar-verse">الْيَوْمَ أَكْمَلْتُ لَكُمْ دِينَكُمْ وَأَتْمَمْتُ عَلَيْكُمْ نِعْمَتِي وَرَضِيتُ لَكُمُ الْإِسْلَامَ دِينًا</p>
     <blockquote>"Today, I have completed your religion, perfected My blessing
-    upon you, and decreed Submission as the religion for you."</blockquote>
+    upon you,
+ and I have decreed Submission as the religion for you."</blockquote>
     <cite>Quran 5:3</cite>
   </div>
 </section>
