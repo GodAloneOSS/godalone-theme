@@ -39,7 +39,7 @@
         array('<img src="'.content_url('/uploads/card-icons/icon-purchase-quran.png').'" alt="Purchase Quran">','Purchase Quran','Order physical copies through Amazon and Flipkart India.','Shop Now', '#buy', 'buy'),
         array('<img src="'.content_url('/uploads/card-icons/icon-book-library.png').'" alt="Book Library">','Book Library','Our comprehensive collection of books about Submission.','Browse', home_url('/library'), ''),
         array('<img src="'.content_url('/uploads/card-icons/icon-submission-videos.png').'" alt="Submission Videos">','Submission Videos','Dr. Rashad Khalifa\'s videos and Friday sermons.','Watch', home_url('/videos'), ''),
-        array('<img src="'.content_url('/uploads/card-icons/icon-charity-trust.png').'" alt="Charity Trust">','Charity Trust','Support charitable work and the spread of God\'s message.','Contribute', home_url('/charity'), ''),
+        array('<img src="'.content_url('/uploads/card-icons/icon-charity-trust.png').'" alt="Charity Trust">','Charity Trust','Support poor families, rescue orphans, care for people with intellectual disabilities, and help the elderly.','Contribute', home_url('/charity'), ''),
         array('<img src="'.content_url('/uploads/card-icons/icon-quran-qa.png').'" alt="Quran Q&A">','Quran Q&A','Test and improve our understanding through simple questions from the Quran.','Take the Quiz', home_url('/quran-qa'), ''),
       );
       foreach ($cards as $c) {
@@ -56,6 +56,43 @@
     </div>
   </div>
 </section>
+
+<!-- ══════════ NEW HERE ══════════ -->
+<section class="blk newhere">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker reveal">🌱 New here?</span>
+      <h2 class="reveal">Start Here</h2>
+      <p class="reveal">Short, simple pages for anyone who is new or curious.</p>
+    </div>
+    <div class="grid grid-3" style="max-width:1100px;margin:0 auto">
+      <a class="card reveal" href="<?php echo esc_url(home_url('/is-this-for-me')); ?>"><span class="ico">🤔</span><h3>Is this for me?</h3><p>Whoever you are, you are welcome. A simple answer with no pressure.</p><span class="go">Read →</span></a>
+      <a class="card reveal" href="<?php echo esc_url(home_url('/is-the-quran-enough')); ?>"><span class="ico">📖</span><h3>Is the Quran enough?</h3><p>A calm look at what the Quran says about itself.</p><span class="go">Read →</span></a>
+      <a class="card reveal" href="<?php echo esc_url(home_url('/check-it-yourself')); ?>"><span class="ico">🧮</span><h3>Check it yourself</h3><p>Five numbers, a calculator and five minutes. No need to trust anyone.</p><span class="go">Try it →</span></a>
+    </div>
+  </div>
+</section>
+<?php if (function_exists('ga_pm_daily') && ($pm = ga_pm_daily('e'))) : ?>
+<section class="blk pm-home">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker reveal">🖼️ Picture of the day</span>
+      <h2 class="reveal">Quran Picture Messages</h2>
+      <p class="reveal">One verse, one picture. Download it and share it with someone today.</p>
+    </div>
+    <style>.pm-home .pm-hc{max-width:420px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}.pm-home .pm-hc img{display:block;width:100%;height:auto}.pm-home .pm-hs{background:linear-gradient(90deg,#9A6A14,#C9922B 28%,#e0b43c 52%,#e8863c 76%,#d4546a);color:#fff;text-align:center;font-weight:700;padding:7px 8px;font-size:.95rem;text-shadow:0 1px 2px rgba(0,0,0,.35)}.pm-home .pm-ha{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:14px}</style>
+    <div class="pm-hc reveal">
+      <a href="<?php echo esc_url(home_url('/picture-messages/#' . $pm)); ?>"><img loading="lazy" alt="" src="<?php echo esc_url(home_url('/picture-messages/img/?f=' . $pm)); ?>"></a>
+      <div class="pm-hs">GodAlone.in</div>
+      <div class="pm-ha">
+        <a class="btn btn-gold" href="<?php echo esc_url(home_url('/picture-messages/#' . $pm)); ?>">⬇ Download / Share</a>
+        <a class="btn btn-ghost" href="<?php echo esc_url(home_url('/picture-messages/')); ?>">🖼️ See all pictures</a>
+      </div>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
 
 <!-- ══════════ UTILITIES ══════════ -->
 <section class="blk utils">
