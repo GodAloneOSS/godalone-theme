@@ -5,8 +5,8 @@
   <div class="wrap gf-top">
     <div class="gf-brand">
       <a href="<?php echo esc_url(home_url('/')); ?>" class="brand brand-logo gf-logo">
-        <img class="logo-dark" src="<?php echo esc_url(get_template_directory_uri() . '/images/godalone-logo-light.png'); ?>" alt="GodAlone.in">
-        <img class="logo-light" src="<?php echo esc_url(get_template_directory_uri() . '/images/godalone-logo.png'); ?>" alt="GodAlone.in">
+        <img class="logo-dark" src="<?php echo esc_url(get_template_directory_uri() . '/images/godalone-logo-light.png?v=nl3'); ?>" alt="GodAlone.in">
+        <img class="logo-light" src="<?php echo esc_url(get_template_directory_uri() . '/images/godalone-logo.png?v=nl3'); ?>" alt="GodAlone.in">
       
 <div class="names"><span class="n1">GodAlone.in</span></div>
 </a>
@@ -58,6 +58,7 @@
 
   <div class="wrap gf-bottom">
     <div class="cc">© <?php echo esc_html(date('Y')); ?> GodAlone.in · <span class="gf-oss"><a href="https://github.com/kadavulmattum" target="_blank" rel="noopener">Open Source</a> <span class="gf-heart">❤️</span></span></div>
+    <div class="gf-legal" style="margin:6px 0;font-size:.9rem"><a href="<?php echo esc_url(home_url('/about')); ?>">About</a> &nbsp;·&nbsp; <a href="<?php echo esc_url(home_url('/privacy-policy')); ?>">Privacy Policy</a> &nbsp;·&nbsp; <a href="<?php echo esc_url(home_url('/copyright')); ?>">Copyright</a></div>
     <div class="duaa">“GOD is the Best Provider &amp; GOD is the Best Designer”</div>
     <div class="praise">Ma Sha Allah · La Quwwata Ella Bellah · Praise be to GOD, Lord of the universe.</div>
   </div>
@@ -71,7 +72,6 @@
     <p class="sb">Insha'Allah, choose your preferred store:</p>
     <div class="pops">
       <a class="pop" target="_blank" rel="noopener" href="https://www.amazon.in/l/27943762031?ie=UTF8&marketplaceID=A21TJRUUN4KGV&product=B09DDBLYF3&me=AX4GIDLDYNYHG">🛒 Buy on Amazon India</a>
-      <span class="pop" style="opacity:.55;cursor:default;pointer-events:none;" aria-disabled="true" title="Coming soon, Insha'Allah">🛍️ Flipkart — Coming Soon</span>
     </div>
     <p class="bl">🤲 May God accept this purchase.</p>
   </div>
