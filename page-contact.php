@@ -42,9 +42,7 @@ get_header();
   <div class="wrap">
     <div class="crumb">GodAlone.in</div>
     <h1 class="reveal">📞 Contact Us</h1>
-    <p class="hero-sub">We'd love to hear from you. Whether you have questions about
-    the Quran, need assistance, or want to share your thoughts, feel free to reach
-    out, Insha'Allah.</p>
+    <p class="hero-sub">Have a question about the Quran, or need help using the site? Write to us. We read every message, Insha'Allah.</p>
   </div>
 </div>
 
@@ -102,12 +100,12 @@ get_header();
   <div class="wrap">
     <div class="newsletter-band">
       <h2 style="margin-bottom:10px">📧 Subscribe to Our Newsletter</h2>
-      <p style="margin-bottom:24px">Receive weekly insights about the Quran and Submission, Insha'Allah.</p>
+      <p style="margin-bottom:24px">A short weekly reflection from the Quran, in your inbox, Insha'Allah.</p>
       <form id="newsletterForm" class="newsletter-form">
         <input type="email" name="newsletter_email" placeholder="Your email address" required>
         <button type="submit">Subscribe</button>
       </form>
-      <p style="margin-top:16px;font-size:.9rem;opacity:.85">Join thousands of Submitters worldwide • Ma Sha Allah</p>
+      <p style="margin-top:16px;font-size:.9rem;opacity:.85">Free to join. One short email a week. Unsubscribe anytime.</p>
     </div>
   </div>
 </section>
@@ -143,7 +141,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   .then(function(data) {
     messageDiv.style.display = 'block';
     if (data.success) {
-      messageDiv.style.background = 'linear-gradient(135deg,#4ade80,#22c55e)';
+      messageDiv.style.background = 'linear-gradient(135deg,#F7D97E,#E5B94E)';
       messageDiv.style.color = '#fff';
       messageDiv.innerHTML = '✅ ' + data.data;
       form.reset();
