@@ -90,11 +90,11 @@ get_header();
 .zk-actions{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap}
 .zk-actions .btn{flex:1;min-width:150px}
 .zk-result{margin-top:26px;padding:28px 22px;border-radius:16px;text-align:center;
-  border:1px solid rgba(52,211,153,.4);background:rgba(52,211,153,.08);animation:zkin .3s ease}
+  border:1px solid rgba(221,171,62,.4);background:rgba(221,171,62,.08);animation:zkin .3s ease}
 @keyframes zkin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .zk-r-icon{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;
-  font-size:24px;background:rgba(52,211,153,.15);color:#34d399}
-.zk-r-title{font-size:clamp(22px,3.6vw,28px);margin:0 0 8px;color:#34d399}
+  font-size:24px;background:rgba(221,171,62,.15);color:#DDAB3E}
+.zk-r-title{font-size:clamp(22px,3.6vw,28px);margin:0 0 8px;color:#DDAB3E}
 .zk-r-formula{font-family:var(--font-body);font-variant-numeric:tabular-nums;font-weight:700;
   font-size:clamp(15px,2.6vw,19px);color:var(--ink);word-break:break-all;margin-bottom:8px}
 .zk-r-note{color:var(--muted);font-size:14.5px;margin:0}
