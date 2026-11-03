@@ -70,7 +70,7 @@ get_header();
 .lang-badge{display:inline-block;padding:3px 11px;border-radius:10px;font-size:.68rem;
   font-weight:700;margin-bottom:.6rem;width:fit-content;color:#fff}
 .lang-english{background:#4A90E2}.lang-tamil{background:#E74C3C}.lang-hindi{background:#FF6B35}
-.lang-urdu{background:#9B59B6}.lang-arabic{background:#27AE60}.lang-other{background:var(--gold)}
+.lang-urdu{background:#9B59B6}.lang-arabic{background:#C69323}.lang-other{background:var(--gold)}
 .book-actions{margin-top:auto;display:flex;flex-direction:column;gap:8px;padding-top:10px}
 .lib-no-results{display:none;text-align:center;padding:40px 0;color:var(--muted)}
 </style>
@@ -116,7 +116,7 @@ get_header();
           <?php if ($book['type'] === 'both'): ?>
             <a href="<?php echo esc_url($book['download']); ?>" class="btn btn-gold" style="font-size:.85rem;padding:10px"
                <?php if (strpos($book['download'], 'http') === false): ?>download<?php endif; ?> target="_blank" rel="noopener">
-              <?php echo isset($book['button_text']) ? esc_html($book['button_text']) : '📥 Free Download'; ?>
+              <?php echo isset($book['button_text']) ? esc_html($book['button_text']) : '📥 Download'; ?>
             </a>
 <?php if (!empty($book['amazon'])): ?>
 <a href="<?php echo esc_url($book['amazon']); ?>" class="btn btn-green" style="font-size:.85rem;padding:10px" target="_blank" rel="noopener">
@@ -126,7 +126,7 @@ get_header();
           <?php elseif ($book['type'] === 'free'): ?>
             <a href="<?php echo esc_url($book['download']); ?>" class="btn btn-gold" style="font-size:.85rem;padding:10px"
                <?php if (strpos($book['download'], 'http') === false): ?>download<?php endif; ?> target="_blank" rel="noopener">
-              <?php echo isset($book['button_text']) ? esc_html($book['button_text']) : '📥 Free Download'; ?>
+              <?php echo isset($book['button_text']) ? esc_html($book['button_text']) : '📥 Download'; ?>
             </a>
           <?php endif; ?>
         </div>
