@@ -422,7 +422,7 @@ window.GA_COLORING_STORIES = <?php echo wp_json_encode($js_stories); ?>;
   var STORIES = window.GA_COLORING_STORIES || [];
   var PALETTE = [
     "#ffffff","#000000","#6b4226","#e63946","#f3722c","#f9c74f",
-    "#90be6d","#43aa8b","#277da1","#4361ee","#7209b7","#f72585",
+    "#E2B75A","#D9A128","#277da1","#4361ee","#7209b7","#f72585",
     "#ffb3c1","#a9def9","#d4a373","#ffd60a"
   ];
 
