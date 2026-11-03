@@ -1,4 +1,25 @@
 <?php
+
+add_action('wp_footer', function () {
+    if (!is_front_page()) { return; }
+    echo <<<'JS'
+<script>(function(){var h=document.querySelector('.hero');if(!h||!('IntersectionObserver' in window))return;new IntersectionObserver(function(e){document.body.classList.toggle('hero-in',e[0].isIntersecting);}).observe(h);})();</script>
+JS;
+}, 99);
+
+/* ---- Homepage SEO description (ga_home_seo_desc) ---- */
+function ga_home_seo_desc() { return 'Submission to God alone (Islam), the final message of God to all humanity. Read the Quran in English, Tamil and Hindi, listen to the audio, and explore books, videos and the 19 calculator.'; }
+foreach (array('aioseo_description', 'aioseo_og_description', 'aioseo_twitter_description') as $ga_a) {
+    add_filter($ga_a, function ($d) { return is_front_page() ? ga_home_seo_desc() : $d; });
+}
+foreach (array('wpseo_metadesc', 'wpseo_opengraph_desc', 'wpseo_twitter_description') as $ga_h) {
+    add_filter($ga_h, function ($d) { return is_front_page() ? ga_home_seo_desc() : $d; });
+}
+add_action('wp_head', function () {
+    if (is_front_page() && !defined('WPSEO_VERSION') && !function_exists('aioseo')) {
+        echo '<meta name="description" content="' . esc_attr(ga_home_seo_desc()) . '">' . "\n";
+    }
+}, 1);
 /**
  * GodAlone Premium — theme functions
  *
@@ -22,7 +43,43 @@
 
 if (!defined('ABSPATH')) exit;
 
-if (!defined('GA_VER')) define('GA_VER', '2.2.0');
+/**
+ * Theme asset version = newest modification time of the theme's own files.
+ * Editing style.css / header.php / footer.php / functions.php changes this
+ * automatically, so browsers fetch the new file with no manual version bump.
+ * Falls back to the fixed string below if the files cannot be read.
+ */
+if (!function_exists('ga_auto_ver')) {
+	function ga_auto_ver() {
+		static $v = null;
+		if ($v !== null) { return $v; }
+		$dir   = get_stylesheet_directory();
+		$stamp = 0;
+		foreach (array('style.css', 'header.php', 'footer.php', 'functions.php') as $f) {
+			$p = $dir . '/' . $f;
+			if (file_exists($p)) {
+				$t = @filemtime($p);
+				if ($t && $t > $stamp) { $stamp = $t; }
+			}
+		}
+		$v = $stamp ? ('2.2.1.' . $stamp) : '2.2.1';
+		return $v;
+	}
+}
+if (!defined('GA_VER')) define('GA_VER', ga_auto_ver());
+
+/**
+ * Auto-purge the LiteSpeed page cache when any theme file changes, so edits
+ * show up without clearing the cache by hand. Runs at most once per change.
+ */
+add_action('init', function () {
+	if (!function_exists('get_option')) { return; }
+	$sig = ga_auto_ver();
+	if (get_option('ga_theme_sig') !== $sig) {
+		update_option('ga_theme_sig', $sig, false);
+		do_action('litespeed_purge_all');
+	}
+}, 99);
 
 /* ---- Firebase config (Google sign-in). Edit here if the project changes. ---- */
 function ga_firebase_config() {
@@ -106,6 +163,77 @@ add_filter('template_include', function ($template) {
 	}
 	return $template;
 });
+
+/* ---- Is-this-for-me page routing (no wp-admin page; same pattern as /faq) ---- */
+add_action('init', function () {
+    add_rewrite_rule('^is-this-for-me/?$', 'index.php?ga_forme_page=1', 'top');
+    if (get_option('ga_forme_rewrite_flushed') !== GA_VER) {
+        flush_rewrite_rules(false);
+        update_option('ga_forme_rewrite_flushed', GA_VER);
+    }
+}, 20);
+add_filter('query_vars', function ($vars) { $vars[] = 'ga_forme_page'; return $vars; });
+add_filter('template_include', function ($template) {
+    if (get_query_var('ga_forme_page')) {
+        $t = get_stylesheet_directory() . '/page-is-this-for-me.php';
+        if (file_exists($t)) return $t;
+    }
+    return $template;
+});
+
+/* ---- Is-the-Quran-enough page routing (no wp-admin page; same pattern as /faq) ---- */
+add_action('init', function () {
+    add_rewrite_rule('^is-the-quran-enough/?$', 'index.php?ga_qenough_page=1', 'top');
+    if (get_option('ga_qenough_rewrite_flushed') !== GA_VER) {
+        flush_rewrite_rules(false);
+        update_option('ga_qenough_rewrite_flushed', GA_VER);
+    }
+}, 20);
+add_filter('query_vars', function ($vars) { $vars[] = 'ga_qenough_page'; return $vars; });
+add_filter('template_include', function ($template) {
+    if (get_query_var('ga_qenough_page')) {
+        $t = get_stylesheet_directory() . '/page-is-the-quran-enough.php';
+        if (file_exists($t)) return $t;
+    }
+    return $template;
+});
+
+/* ---- Check-it-yourself page routing (no wp-admin page; same pattern as /faq) ---- */
+add_action('init', function () {
+    add_rewrite_rule('^check-it-yourself/?$', 'index.php?ga_check_page=1', 'top');
+    if (get_option('ga_check_rewrite_flushed') !== GA_VER) {
+        flush_rewrite_rules(false);
+        update_option('ga_check_rewrite_flushed', GA_VER);
+    }
+}, 20);
+add_filter('query_vars', function ($vars) { $vars[] = 'ga_check_page'; return $vars; });
+add_filter('template_include', function ($template) {
+    if (get_query_var('ga_check_page')) {
+        $t = get_stylesheet_directory() . '/page-check-it-yourself.php';
+        if (file_exists($t)) return $t;
+    }
+    return $template;
+});
+
+/* ---- About / Privacy / Copyright routing (no wp-admin page; same pattern as /faq) ---- */
+add_action('init', function () {
+    add_rewrite_rule('^(about|privacy-policy|copyright)/?$', 'index.php?ga_legal=$matches[1]', 'top');
+    if (get_option('ga_legal_rewrite_flushed') !== GA_VER) {
+        flush_rewrite_rules(false);
+        update_option('ga_legal_rewrite_flushed', GA_VER);
+    }
+}, 20);
+add_filter('query_vars', function ($vars) { $vars[] = 'ga_legal'; return $vars; });
+add_filter('template_include', function ($template) {
+    if (get_query_var('ga_legal')) {
+        $t = get_stylesheet_directory() . '/page-legal.php';
+        if (file_exists($t)) return $t;
+    }
+    return $template;
+});
+
+/* ---- Picture Messages (/picture-messages) ---- */
+if (file_exists(get_stylesheet_directory() . '/inc-picture-messages.php')) { require_once get_stylesheet_directory() . '/inc-picture-messages.php'; }
 
 /* ---- Newsletter subscribe (AJAX). Keeps the old action + field names. ---- */
 function ga_newsletter_subscribe() {
@@ -210,10 +338,14 @@ function ga_default_menu() {
 	$items = array(
 		array('🏠', 'Home', home_url('/'), ''),
 		array('📖', 'Introduction', home_url('/introduction'), ''),
+		array('🤔', 'Is this for me?', home_url('/is-this-for-me'), ''),
+		array('📖', 'Is the Quran enough?', home_url('/is-the-quran-enough'), ''),
+		array('🧮', 'Check it yourself', home_url('/check-it-yourself'), ''),
 		array('🔢', 'Mathematical Miracle', home_url('/mathematical-miracle'), ''),
 		array('💻', 'Online Quran', home_url('/quran/'), '_blank'),
 		array('📱', 'Download Quran', home_url('/downloads'), ''),
 		array('🎧', 'Quran Audio', home_url('/audio-quran'), ''),
+		array('🖼️', 'Picture Messages', home_url('/picture-messages'), ''),
 		array('🛒', 'Purchase Quran', '#buy', 'buy'),
 		array('📚', 'Library', home_url('/library'), ''),
 		array('🎥', 'Videos', home_url('/videos'), ''),
@@ -408,3 +540,11 @@ add_action('send_headers', function () {
         header('Cache-Control: no-cache, must-revalidate, max-age=0');
     }
 }, 99);
+
+require_once get_template_directory() . '/inc-bottombar.php';
+
+/* new logo 15-10-2026: cache-bust site icons (tab, apple-touch, tile) */
+add_filter('get_site_icon_url', function($url){ return $url ? add_query_arg('v','nl3',$url) : $url; });
+
+/* 15-10-2026: browsers were keeping page HTML for 7 days (max-age=604800) so visitors missed updates; keep HTML fresh for 10 min, assets keep their own long caching */
+add_action('send_headers', function(){ if (is_admin() || is_user_logged_in() || (defined('DOING_AJAX') && DOING_AJAX) || (defined('REST_REQUEST') && REST_REQUEST)) return; header('Cache-Control: public, max-age=600, must-revalidate', true); }, 99);
