@@ -32,6 +32,8 @@
         <li><a class="gh-buy" href="#buy">🛒 Quran Purchase</a></li>
         <li><a href="<?php echo esc_url(home_url('/quran-qa')); ?>">❓ Quran Q&amp;A</a></li>
         <li><a href="<?php echo esc_url(home_url('/coloring-book')); ?>">🎨 Quran Coloring Book</a></li>
+<li><a href="<?php echo esc_url(home_url('/quran/chapters/')); ?>">📖 All 114 Quran Chapters</a></li>
+        <li><a href="<?php echo esc_url(home_url('/appendices/')); ?>">📚 The 38 Appendices</a></li>
       </ul>
     </div>
 
@@ -83,6 +85,7 @@
 </a>
 <button class="totop" id="ghTop" aria-label="Back to top" type="button">↑</button>
 
+<script src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/js/ga-account.js?v=9" defer></script>
 <?php wp_footer(); ?>
 </body>
 </html>
