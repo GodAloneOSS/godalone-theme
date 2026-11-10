@@ -548,3 +548,6 @@ add_filter('get_site_icon_url', function($url){ return $url ? add_query_arg('v',
 
 /* 15-10-2026: browsers were keeping page HTML for 7 days (max-age=604800) so visitors missed updates; keep HTML fresh for 10 min, assets keep their own long caching */
 add_action('send_headers', function(){ if (is_admin() || is_user_logged_in() || (defined('DOING_AJAX') && DOING_AJAX) || (defined('REST_REQUEST') && REST_REQUEST)) return; header('Cache-Control: public, max-age=600, must-revalidate', true); }, 99);
+
+/* Load SEO/language/security refinements (added 04-11-2026); a problem in that file cannot take the site down. */
+try { $ga_inc = get_template_directory() . "/inc-seo-fixes.php"; if (file_exists($ga_inc)) { include_once $ga_inc; } } catch (\Throwable $e) { }
