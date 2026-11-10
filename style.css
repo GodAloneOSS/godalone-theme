@@ -426,3 +426,18 @@ html.theme-day .verse,html.theme-day .verse *,html.theme-day .ar-verse,html.them
 /* ===== GodAlone theme refresh 2026-11-03: Midnight Noor (dark) + Dawn Ivory (day) ===== */
 :root{--bg:#0A1024;--bg-2:#0F1831;--bg-3:#152046;--panel:#111B38;--panel-2:#0C1430;--panel-hi:#18254D;--line:rgba(229,185,78,.24);--line-2:rgba(255,255,255,.08);--ink:#F7F2E6;--ink-soft:#D9DCEB;--muted:#9AA6C8;--gold:#E5B94E;--gold-bright:#F7D97E;--gold-deep:#B98B22;--gold-tan:#F2DFA8;--blue:#6F8FFF;--blue-bright:#A9BDFF;--teal:#62CFC4;--shadow:0 24px 60px -24px rgba(2,5,18,.85);--shadow-sm:0 10px 30px -14px rgba(2,5,18,.7);--hero:radial-gradient(120% 90% at 12% -5%,rgba(229,185,78,.20),transparent 52%),radial-gradient(120% 90% at 88% 105%,rgba(111,143,255,.22),transparent 55%),linear-gradient(162deg,#18254D 0%,#0F1831 52%,#0A1024 100%)}
 html.theme-day{--bg:#FBF7EE;--bg-2:#F5ECD9;--bg-3:#FFFFFF;--panel:#FFFFFF;--panel-2:#FAF3E3;--panel-hi:#FFFDF7;--line:rgba(150,108,28,.28);--line-2:rgba(27,37,71,.09);--ink:#1B2547;--ink-soft:#46517A;--muted:#6C7595;--gold:#C9922B;--gold-bright:#8A5A12;--gold-deep:#9A6A14;--gold-tan:#8A5A12;--blue:#3F5BD0;--blue-bright:#5B78E8;--teal:#1E8F88;--shadow:0 24px 60px -28px rgba(27,37,71,.28);--shadow-sm:0 10px 26px -16px rgba(27,37,71,.2);--hero:radial-gradient(120% 90% at 12% -5%,rgba(229,185,78,.28),transparent 52%),radial-gradient(120% 90% at 88% 105%,rgba(111,143,255,.20),transparent 55%),linear-gradient(162deg,#FFF8E6 0%,#F8EFD8 55%,#EEE6F6 100%)}
+
+
+/* GA-A11Y-2026-11-04 accessibility: skip link, touch targets, focus, day-mode kicker */
+.ga-skip{position:absolute;left:10px;top:-80px;z-index:100000;background:#E5B94E;color:#10193A;padding:12px 18px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.35);transition:top .15s}
+.ga-skip:focus{top:10px;outline:3px solid #10193A;outline-offset:2px}
+:focus-visible{outline:3px solid #E5B94E;outline-offset:3px}
+html.theme-day :focus-visible{outline-color:#8A5A12}
+html.theme-day .kicker{color:#725200}
+footer li a,footer .gf-oss a,.gx-more a{display:inline-flex;align-items:center;min-height:32px;padding-block:6px}
+@media (pointer:coarse),(max-width:820px){
+  footer li a,footer .gf-oss a,.gx-more a,footer .gf-bottom a{min-height:44px;padding-block:10px}
+  footer li{margin-block:0}
+}
+
+footer .gf-bottom a{display:inline-flex;align-items:center;min-height:32px;padding-block:6px}
