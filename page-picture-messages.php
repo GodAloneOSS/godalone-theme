@@ -21,15 +21,18 @@ $idx = function_exists('ga_pm_index') ? ga_pm_index() : array();
 .pm-img img{width:100%;height:auto;display:block;min-height:140px;object-fit:contain}
 .pm-strip,.pm-lb .pm-strip{background:linear-gradient(90deg,#141a36,#1f2850 50%,#caa43d 85%,#e7c877 100%);color:#fff;text-align:center;font-weight:700;letter-spacing:.3px;padding:7px 8px;font-size:.95rem;text-shadow:0 1px 2px rgba(0,0,0,.35)}
 .pm-card figcaption{padding:10px 14px 4px;font-size:.92rem;opacity:.85}
-.pm-act{display:flex;gap:8px;padding:6px 12px 14px}
-.pm-act button{flex:1;border:1px solid rgba(238,242,255,.3);background:transparent;color:#eef2ff;border-radius:10px;padding:9px 6px;font:inherit;font-size:.9rem;cursor:pointer}
-.pm-act button:hover{border-color:#e7c877}
+.pm-act{display:flex;flex-wrap:wrap;gap:8px;padding:6px 12px 14px}
+.pm-act button,.pm-act a{flex:1;min-width:100px;border:1px solid rgba(238,242,255,.3);background:transparent;color:#eef2ff;border-radius:10px;padding:9px 6px;font:inherit;font-size:.9rem;cursor:pointer;text-align:center;text-decoration:none;display:inline-block;box-sizing:border-box}
+.pm-act button:hover,.pm-act a:hover{border-color:#e7c877}
+.pm-lb .pm-act2{padding-top:0}
 .pm-empty{padding:30px;text-align:center;opacity:.8}
 .pm-lb{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:9999;display:none;align-items:center;justify-content:center;padding:14px;overflow:auto}
 .pm-lb.on{display:flex}
-.pm-lb .box{max-width:min(94vw,560px);width:100%;background:#1a2040;border-radius:14px;overflow:hidden}
+.pm-lb .box{position:relative;max-width:min(94vw,560px);width:100%;background:#1a2040;border-radius:14px;overflow:hidden}
 .pm-lb img{width:100%;display:block}
 .pm-lb .pm-act{padding:10px 12px}
+.pm-lb-x{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:#e53935;color:#fff;border:2px solid rgba(255,255,255,.85);font:inherit;font-size:1.05rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.pm-lb-x:hover{background:#c62828}
 .pm-note{font-size:.9rem;opacity:.8;margin-top:18px}
 @media(max-width:560px){.pm-grid{grid-template-columns:1fr 1fr;gap:12px}.pm-act{flex-direction:column}.pm-card figcaption{font-size:.85rem}}
 .page-hero{background:linear-gradient(135deg,#141a36,#1f2850 55%,#2a2f5c)!important}
@@ -58,12 +61,16 @@ body::before,body::after{background:#101530!important}
 
 <div class="pm-lb" id="pmLb" role="dialog" aria-modal="true">
   <div class="box">
+    <button type="button" id="pmLbX" class="pm-lb-x" aria-label="Close">✕</button>
     <img id="pmLbImg" alt="">
     <div class="pm-strip">GodAlone.in</div>
     <div class="pm-act">
       <button type="button" id="pmLbDl">⬇ Download</button>
       <button type="button" id="pmLbSh">📲 Share</button>
-      <button type="button" id="pmLbX">✕ Close</button>
+    </div>
+    <div class="pm-act pm-act2">
+      <a href="#" id="pmLbVerse">📖 Go to Verse</a>
+      <a href="https://godalone.in/" id="pmLbSite">🌐 Go to Website</a>
     </div>
   </div>
 </div>
@@ -72,6 +79,8 @@ body::before,body::after{background:#101530!important}
 (function(){
 var D = <?php echo wp_json_encode($idx); ?>;
 var BASE = <?php echo wp_json_encode(home_url('/picture-messages/img/')); ?>;
+var QURAN_BASE = <?php echo wp_json_encode(home_url('/quran/')); ?>;
+var HOME_BASE = <?php echo wp_json_encode(home_url('/')); ?>;
 var NAMES = ["Al-Fatiha","Al-Baqarah","Al-Imran","An-Nisa","Al-Ma'idah","Al-An'am","Al-A'raf","Al-Anfal","At-Tawbah","Yunus","Hud","Yusuf","Ar-Ra'd","Ibrahim","Al-Hijr","An-Nahl","Al-Isra","Al-Kahf","Maryam","Ta-Ha","Al-Anbiya","Al-Hajj","Al-Mu'minun","An-Nur","Al-Furqan","Ash-Shu'ara","An-Naml","Al-Qasas","Al-Ankabut","Ar-Rum","Luqman","As-Sajdah","Al-Ahzab","Saba","Fatir","Ya-Sin","As-Saffat","Sad","Az-Zumar","Ghafir","Fussilat","Ash-Shura","Az-Zukhruf","Ad-Dukhan","Al-Jathiyah","Al-Ahqaf","Muhammad","Al-Fath","Al-Hujurat","Qaf","Adh-Dhariyat","At-Tur","An-Najm","Al-Qamar","Ar-Rahman","Al-Waqi'ah","Al-Hadid","Al-Mujadila","Al-Hashr","Al-Mumtahanah","As-Saff","Al-Jumu'ah","Al-Munafiqun","At-Taghabun","At-Talaq","At-Tahrim","Al-Mulk","Al-Qalam","Al-Haqqah","Al-Ma'arij","Nuh","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyamah","Al-Insan","Al-Mursalat","An-Naba","An-Nazi'at","Abasa","At-Takwir","Al-Infitar","Al-Mutaffifin","Al-Inshiqaq","Al-Buruj","At-Tariq","Al-A'la","Al-Ghashiyah","Al-Fajr","Al-Balad","Ash-Shams","Al-Layl","Ad-Duha","Ash-Sharh","At-Tin","Al-Alaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah","Al-Adiyat","Al-Qari'ah","At-Takathur","Al-Asr","Al-Humazah","Al-Fil","Quraysh","Al-Ma'un","Al-Kawthar","Al-Kafirun","An-Nasr","Al-Masad","Al-Ikhlas","Al-Falaq","An-Nas"];
 var LABEL = {e:'English', t:'தமிழ்', h:'हिन्दी'};
 var lang = 'e', sura = null;
@@ -101,6 +110,8 @@ function drawChips(){
   });
 }
 function ref(st){var m=st.match(/^(\d+)\.(\d+)/);return 'Quran '+m[1]+':'+m[2];}
+function versePos(st){var m=st.match(/^(\d+)\.(\d+)/);return m?{s:m[1],v:m[2]}:null;}
+function verseUrl(st){var p=versePos(st);return p?QURAN_BASE+'#/'+p.s+'/'+p.v:QURAN_BASE;}
 function drawGrid(){
   gridEl.innerHTML='';
   if(sura===null){gridEl.innerHTML='<div class="pm-empty">Pictures for this language are coming soon, Insha Allah.</div>';return;}
@@ -169,7 +180,8 @@ function share(st){
   }).catch(fallback);
 }
 var lb=document.getElementById('pmLb'),lbImg=document.getElementById('pmLbImg'),cur=null;
-function openLb(st){cur=st;lbImg.src=BASE+'?s=full&f='+st;lbImg.alt=ref(st);lb.className='pm-lb on';}
+var lbVerse=document.getElementById('pmLbVerse');
+function openLb(st){cur=st;lbImg.src=BASE+'?s=full&f='+st;lbImg.alt=ref(st);lb.className='pm-lb on';if(lbVerse)lbVerse.href=verseUrl(st);}
 function closeLb(){lb.className='pm-lb';lbImg.src='';}
 document.getElementById('pmLbX').onclick=closeLb;
 document.getElementById('pmLbDl').onclick=function(){if(cur)download(cur);};
