@@ -14,7 +14,7 @@ get_header();
   <div class="wrap">
     <div class="crumb">GodAlone.in</div>
     <h1 class="reveal">Download Quran</h1>
-    <p class="hero-sub">Download the Final Testament — God's message to
+    <p class="hero-sub">Download the Final Scripture — God's message to
     humanity — in multiple formats and languages, Insha'Allah.</p>
   </div>
 </div>
@@ -95,6 +95,12 @@ get_header();
       <h2>PDF downloads</h2>
     </div>
     <div class="grid grid-3">
+      <a class="card reveal" href="https://drive.google.com/uc?export=download&amp;id=12mFronn0X5m0dvGtHnoEsBoE1KcK4koj" target="_blank" rel="noopener">
+        <div class="ico"><img src="<?php echo esc_url(content_url('uploads/downloads/cover-quran-arabic-english.jpg')); ?>" style="width:56px;height:56px;object-fit:cover;object-position:center 30%" alt="Quran The Final Testament Arabic-English PDF cover" loading="lazy"></div>
+        <h3>Quran: Arabic-English PDF</h3>
+        <p>Quran: The Final Testament — Authorized English Version with Arabic text, free download.</p>
+        <span class="go">Download Arabic-English PDF →</span>
+      </a>
       <a class="card reveal" href="https://kadavulmattum.org/wp-content/uploads/2020/06/Tamil-Quran-Iruthi-vetham.pdf" target="_blank" rel="noopener">
         <div class="ico"><img src="<?php echo esc_url(content_url('uploads/downloads/icon-tamil-quran-pdf.png')); ?>" alt="Tamil Quran PDF icon" loading="lazy"></div>
         <h3>Tamil Quran PDF</h3>
