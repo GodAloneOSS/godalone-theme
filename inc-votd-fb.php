@@ -27,6 +27,19 @@ function ga_vfb_text($v, $lang) {
 	return "\xE2\x9C\xA6 " . ($lang === 'ta' ? 'Kadavulmattum.org' : ($lang === 'hi' ? 'Ekkhuda.org' : 'GodAlone.in')) . ' ' . $T['title'] . "\n\n" . $v['ar'] . "\n\n" . $tr . "\n\n" . $ref . "\n" . $T['read'] . ': ' . $url;
 }
 
+/* If today's verse has no translation in this language, use the next verse that has one (no English fallback). */
+function ga_vfb_verse_for_lang($v, $lang) {
+	if ($lang === 'en' || !empty($v[$lang])) { return $v; }
+	$f = ABSPATH . 'quran/votd.json';
+	if (!is_readable($f)) { return $v; }
+	$d = json_decode((string) file_get_contents($f), true);
+	if (!is_array($d)) { return $v; }
+	$ok = array();
+	foreach ($d as $x) { if (is_array($x) && !empty($x[$lang])) { $ok[] = $x; } }
+	if (!$ok) { return $v; }
+	return $ok[((int) floor(time() / 86400)) % count($ok)];
+}
+
 function ga_vfb_send($page_id, $token, $text) {
 	$r = wp_remote_post('https://graph.facebook.com/v21.0/' . rawurlencode($page_id) . '/feed', array(
 		'timeout' => 20,
@@ -53,7 +66,7 @@ function ga_vfb_run($force) {
 		$page  = isset($o['page_' . $lang]) ? trim((string) $o['page_' . $lang]) : '';
 		$token = isset($o['token_' . $lang]) ? trim((string) $o['token_' . $lang]) : '';
 		if ($page === '' || $token === '') { continue; }
-		$r = ga_vfb_send($page, $token, ga_vfb_text($v, $lang));
+		$r = ga_vfb_send($page, $token, ga_vfb_text(ga_vfb_verse_for_lang($v, $lang), $lang));
 		if ($r[0]) { $any = true; }
 		$res[] = strtoupper($lang) . ' page ' . $page . ': ' . ($r[0] ? 'posted' : 'FAILED - ' . $r[1]);
 	}
