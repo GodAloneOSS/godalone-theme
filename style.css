@@ -3,7 +3,7 @@ Theme Name: GodAlone Premium
 Theme URI: https://godalone.in
 Author: GodAlone.in
 Author URI: https://godalone.in
-Description: A premium, deep-navy & gold WordPress theme for GodAlone.in, matching the Quran — The Final Testament reader. Trilingual-aware, dark/light, Firebase login, newsletter, and Islamic utilities. Built as a complete drop-in replacement for the godalone-theme.
+Description: A premium, deep-navy & gold WordPress theme for GodAlone.in, matching the Quran — The Final Scripture reader. Trilingual-aware, dark/light, Firebase login, newsletter, and Islamic utilities. Built as a complete drop-in replacement for the godalone-theme.
 Version: 2.0
 Requires at least: 5.8
 Tested up to: 6.6
@@ -441,3 +441,8 @@ footer li a,footer .gf-oss a,.gx-more a{display:inline-flex;align-items:center;m
 }
 
 footer .gf-bottom a{display:inline-flex;align-items:center;min-height:32px;padding-block:6px}
+
+/* lang badges contrast 12-11-2026 */
+html .lang-badge.lang-hindi{background:#C2410C;color:#fff}
+html .lang-badge.lang-english{background:#2563B0;color:#fff}
+html .lang-badge.lang-tamil{background:#C0392B;color:#fff}
