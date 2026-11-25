@@ -350,6 +350,7 @@ function ga_default_menu() {
 		array('📚', 'Library', home_url('/library'), ''),
 		array('🎥', 'Videos', home_url('/videos'), ''),
 		array('🤖', 'Telegram Bot', 'https://t.me/quranalonebot', '_blank'),
+		array('💻', 'Masjid India IT Wing', home_url('/it-wing/'), ''),
 		array('❤️', 'Charity Trust', home_url('/charity'), ''),
 		array('📞', 'Contact', home_url('/contact'), ''),
 	);
@@ -462,6 +463,7 @@ function kh_seed_index_items() {
 		array('title' => 'Mathematical Miracle', 'excerpt' => 'The numerical (19-based) structure and mathematical miracle of the Quran.', 'url' => home_url('/mathematical-miracle/')),
 		array('title' => 'Quran Coloring Book for Kids', 'excerpt' => '24 Quran stories to colour — a kids activity book, including Building the Ka\'bah.', 'url' => home_url('/coloring-book/')),
 		array('title' => 'Audio Quran', 'excerpt' => 'Listen to Quran recitation — audio Quran.', 'url' => home_url('/audio-quran/')),
+		array('title' => 'Masjid India IT Wing', 'excerpt' => 'Masjid India Muslim Jamath IT Wing — the team, completed work (Bayyinah, newsletter, Quran quiz and more) and volunteer registration.', 'url' => home_url('/it-wing/')),
 	);
 }
 
@@ -551,3 +553,30 @@ add_action('send_headers', function(){ if (is_admin() || is_user_logged_in() || 
 
 /* Load SEO/language/security refinements (added 04-11-2026); a problem in that file cannot take the site down. */
 try { $ga_inc = get_template_directory() . "/inc-seo-fixes.php"; if (file_exists($ga_inc)) { include_once $ga_inc; } } catch (\Throwable $e) { }
+
+
+/* ---- Masjid India IT Wing page (/it-wing/) — added 15-11-2026 ---- */
+add_action('init', function () {
+	add_rewrite_rule('^it-wing/?$', 'index.php?ga_itwing=1', 'top');
+	if (get_option('ga_itwing_rewrite_flushed') !== GA_VER) {
+		flush_rewrite_rules(false);
+		update_option('ga_itwing_rewrite_flushed', GA_VER);
+	}
+}, 20);
+add_filter('query_vars', function ($vars) { $vars[] = 'ga_itwing'; return $vars; });
+add_filter('template_include', function ($template) {
+	if (get_query_var('ga_itwing')) {
+		$t = get_stylesheet_directory() . '/page-it-wing.php';
+		if (file_exists($t)) {
+			global $wp_query;
+			$wp_query->is_404 = false;
+			status_header(200);
+			return $t;
+		}
+	}
+	return $template;
+});
+
+
+/* IT Wing registrations (saved in this site's own database) */
+if (file_exists(get_stylesheet_directory() . '/inc-itw-registrations.php')) { require_once get_stylesheet_directory() . '/inc-itw-registrations.php'; }
