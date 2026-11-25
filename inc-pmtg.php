@@ -52,6 +52,29 @@ function ga_pmtg_send_photo($token, $chat, $photo_url, $caption) {
     return array(false, (is_array($j) && isset($j['description'])) ? $j['description'] : ('HTTP ' . wp_remote_retrieve_response_code($r)));
 }
 
+/* PMTG-UPLOAD: last resort - read the picture ourselves and upload the file to Telegram (no link for Telegram to fetch). */
+function ga_pmtg_send_photo_upload($token, $chat, $photo_url, $caption) {
+    $g = wp_remote_get($photo_url, array('timeout' => 40));
+    if (is_wp_error($g) || (int) wp_remote_retrieve_response_code($g) !== 200) { return array(false, 'could not read the picture'); }
+    $bin = wp_remote_retrieve_body($g);
+    if (strlen($bin) < 1000) { return array(false, 'picture was empty'); }
+    $bd = 'gapmtg' . wp_generate_password(16, false, false);
+    $body = '';
+    foreach (array('chat_id' => $chat, 'caption' => $caption) as $k => $val) {
+        $body .= '--' . $bd . "\r\n" . 'Content-Disposition: form-data; name="' . $k . '"' . "\r\n\r\n" . $val . "\r\n";
+    }
+    $body .= '--' . $bd . "\r\n" . 'Content-Disposition: form-data; name="photo"; filename="picture.png"' . "\r\n" . 'Content-Type: image/png' . "\r\n\r\n" . $bin . "\r\n" . '--' . $bd . '--' . "\r\n";
+    $r = wp_remote_post('https://api.telegram.org/bot' . $token . '/sendPhoto', array(
+        'timeout' => 60,
+        'headers' => array('Content-Type' => 'multipart/form-data; boundary=' . $bd),
+        'body' => $body,
+    ));
+    if (is_wp_error($r)) { return array(false, str_replace($token, '***', $r->get_error_message())); }
+    $j = json_decode(wp_remote_retrieve_body($r), true);
+    if (is_array($j) && !empty($j['ok'])) { return array(true, 'sent'); }
+    return array(false, (is_array($j) && isset($j['description'])) ? $j['description'] : ('HTTP ' . wp_remote_retrieve_response_code($r)));
+}
+
 function ga_pmtg_run($force) {
     $o = ga_pmtg_opts();
     $token = ga_pmtg_token();
@@ -71,7 +94,11 @@ function ga_pmtg_run($force) {
         if ($stem === '' || !ga_pm_find($stem)) { $res[] = strtoupper($lang) . ' ' . $chat . ': FAILED - no picture available for this language yet.'; continue; }
         $photo_url = home_url('/picture-messages/img/?f=' . rawurlencode($stem) . '&s=full');
         $caption = ga_pmtg_caption($stem, $lang);
+        /* PMTG-RETRY: warm the picture first, and retry once if Telegram could not fetch it. */
+        wp_remote_get($photo_url, array('timeout' => 25));
         $r = ga_pmtg_send_photo($token, $chat, $photo_url, $caption);
+        if (!$r[0]) { sleep(5); wp_remote_get($photo_url, array('timeout' => 25)); $r = ga_pmtg_send_photo($token, $chat, $photo_url, $caption); }
+        if (!$r[0]) { $r2 = ga_pmtg_send_photo_upload($token, $chat, $photo_url, $caption); if ($r2[0]) { $r = $r2; } else { $r[1] .= ' | upload: ' . $r2[1]; } }
         if ($r[0]) { $any = true; }
         $res[] = strtoupper($lang) . ' ' . $chat . ' (' . $stem . '): ' . ($r[0] ? 'sent' : 'FAILED - ' . $r[1]);
     }
