@@ -93,7 +93,7 @@ table.mm-table td.mm-wrap-cell{white-space:normal;min-width:260px}
     <li><a href="#why-19"><span class="n">8.</span> Why 19!</a></li>
     <li><a href="#word-quran"><span class="n">9.</span> The Word &ldquo;Quran&rdquo;</a></li>
     <li><a href="#strong-foundation"><span class="n">10.</span> A Strong Foundation</a></li>
-    <li><a href="#five-pillars"><span class="n">11.</span> The Five Pillars of Islam</a></li>
+    <li><a href="#five-pillars"><span class="n">11.</span> Major Commandments in the Quran</a></li>
     <li><a href="#mathematical-structure"><span class="n">12.</span> The Quran&rsquo;s Mathematical Structure</a></li>
     <li><a href="#numbers-suras-verses"><span class="n">13.</span> The Numbers of Suras and Verses</a></li>
     <li><a href="#superhuman-combinations"><span class="n">14.</span> Superhuman Numerical Combinations</a></li>
@@ -858,7 +858,7 @@ table.mm-table td.mm-wrap-cell{white-space:normal;min-width:260px}
 </div>
 
 <div class="mm-section" id="five-pillars">
-<h2>The Five Pillars of Islam</h2>
+<h2>Major Commandments in the Quran</h2>
 <p>Although the Quran provides numerous important commandments governing all aspects of our lives (see for example 17:22-38), five basic &ldquo;pillars&rdquo; have been traditionally emphasized. They are:</p>
 <ol class="mm-facts" style="counter-reset:none">
 <li><b>Shahaadah:</b>&nbsp;Bearing witness that there is no other god besides God.</li>
